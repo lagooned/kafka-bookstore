@@ -2,3 +2,10 @@
 # get book
 GET http://localhost:8080/books/
 
+# new book
+POST http://localhost:8080/book/new
+Content-type: application/json
+
+{
+  "title": "the green mile"
+}

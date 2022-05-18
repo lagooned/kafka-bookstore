@@ -11,7 +11,7 @@ public class BooksProducerService {
 
   public static final Logger logger = LoggerFactory.getLogger(BooksProducerService.class);
 
-  KafkaTemplate<String, String> kafkaTemplate;
+  private KafkaTemplate<String, String> kafkaTemplate;
 
   @Autowired
   public BooksProducerService(KafkaTemplate<String, String> kafkaTemplate) {

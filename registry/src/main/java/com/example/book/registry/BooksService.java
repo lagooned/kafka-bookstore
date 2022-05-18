@@ -17,4 +17,8 @@ public class BooksService {
     this.booksProducerService = booksProducerService;
   }
 
+  public void createBook(Book book) {
+    booksProducerService.send(book.getTitle());
+  }
+
 }
