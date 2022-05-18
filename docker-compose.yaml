@@ -32,7 +32,7 @@ services:
       - kafka
     ports:
       - 8080:8080
-    command: ["/app/wait-for-it.sh", "kafka:29092", "--", "bash", "-c", "java -jar /app/target/registry-*.jar"]
-      
+    command: >-
+      /app/wait-for-it.sh kafka:29092 -- bash -c "java -jar /app/target/registry-*.jar"
 ...
 # 73f1cba407ecf2feadd9f992ef63e8ca ends here
