@@ -1,0 +1,14 @@
+---
+spring:
+  kafka:
+    consumer:
+      bootstrap-server: kafka:29092
+      group-id: group-id
+      auto-offset-rest: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-server: kafka:29092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+...
