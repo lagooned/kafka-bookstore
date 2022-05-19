@@ -1,19 +1,20 @@
 package com.example.book.registry;
 
-import org.apache.kafka.clients.KafkaClient;
-import org.apache.kafka.streams.KafkaStreams;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.annotation.DirtiesContext;
 
-@SpringBootTest
+@SpringBootTest(
+  properties = "spring.kafka.bootstrap-servers=localhost:9092")
+@EmbeddedKafka(
+  partitions = 1,
+  brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" },
+  topics = { "books" })
+@DirtiesContext
 class RegistryApplicationTests {
 
-  @MockBean
-  KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
-
-	@Test
-	void contextLoads() {}
+  @Test
+  void contextLoads() {}
 
 }
