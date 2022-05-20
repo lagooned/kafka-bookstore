@@ -30,7 +30,7 @@ services:
     image: book/topics
     depends_on:
       - kafka
-    command: >
+    command: >-
       /wait-for-it.sh kafka:9092 -- /create-topics-and-listen.sh
   book_registry:
     container_name: br_350066aa7594c13f6a13c7fa2f0bd0fa_1
