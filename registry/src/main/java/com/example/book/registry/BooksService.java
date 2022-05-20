@@ -1,7 +1,12 @@
 package com.example.book.registry;
 
+import static java.util.Spliterators.spliteratorUnknownSize;
+import static java.util.stream.StreamSupport.stream;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.Collectors;
 
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StoreQueryParameters;
@@ -34,12 +39,13 @@ public class BooksService {
 
   public List<Book> getAllBooks() {
     KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
-    ReadOnlyKeyValueStore<String, String> books = kafkaStreams.store(
-        StoreQueryParameters.fromNameAndType("booksKeyValueStore", QueryableStoreTypes.keyValueStore()));
-    List<Book> bl = new ArrayList<>();
-    books.all().forEachRemaining(
-        (var kv) -> bl.add(new Book().setId(kv.key).setTitle(kv.value)));
-    return bl;
+    ReadOnlyKeyValueStore<String, String> books
+      = kafkaStreams.store(
+        StoreQueryParameters.fromNameAndType(
+          "booksKeyValueStore", QueryableStoreTypes.keyValueStore()));
+    return stream(spliteratorUnknownSize(books.all(), 0), false)
+      .map(kv -> new Book().setId(kv.key).setTitle(kv.value))
+      .collect(Collectors.toList());
   }
 
 }
