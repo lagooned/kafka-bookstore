@@ -4,26 +4,24 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.util.List;
 
-import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GetBooks {
+public class PutBooks {
 
   BooksService booksService;
 
   @Autowired
-  GetBooks(BooksService booksService) {
+  PutBooks(BooksService booksService) {
     this.booksService = booksService;
   }
 
-  @GetMapping(value = "/books/", produces = APPLICATION_JSON_VALUE)
-  public List<Book> getBooks() {
-    return booksService.getAllBooks();
+  @PostMapping(value = "/book/new", consumes = APPLICATION_JSON_VALUE)
+  public Book addBook(@RequestBody AddBookRequest request) {
+    return booksService.createBook(request.toBook());
   }
 
 }

@@ -13,7 +13,7 @@ public class AddBookRequest {
   }
 
   public Book toBook() {
-    return new Book(this.title);
+    return new Book().setTitle(title);
   }
 
 }

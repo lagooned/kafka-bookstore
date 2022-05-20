@@ -20,9 +20,11 @@ public class BooksProducerService {
     this.kafkaTemplate = kafkaTemplate;
   }
 
-  public void send(String message) {
-    logger.info("sending message -> {}", message);
-    this.kafkaTemplate.send("books", UUID.randomUUID().toString(), message);
+  public Book send(Book book) {
+    String uuid = UUID.randomUUID().toString();
+    logger.info("sending message -> {}:{}", uuid, book.getTitle());
+    this.kafkaTemplate.send("books", uuid, book.getTitle());
+    return book.setId(uuid);
   }
 
 }

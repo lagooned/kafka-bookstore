@@ -5,6 +5,9 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,9 @@ public class BooksConsumerService {
     KStream<String, String> messageStream = streamsBuilder
       .stream("books", Consumed.with(STRING_SERDE, STRING_SERDE));
 
-    messageStream.foreach((k, v) -> System.out.println(k + ":" + v));
+    KTable<String, String> messageTable = messageStream
+      .peek((k, v) -> System.out.println(k + ": " + v))
+      .toTable(Materialized.as("booksKeyValueStore"));
   }
 
 }
