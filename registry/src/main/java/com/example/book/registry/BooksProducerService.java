@@ -1,5 +1,7 @@
 package com.example.book.registry;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class BooksProducerService {
 
   public void send(String message) {
     logger.info("sending message -> {}", message);
-    this.kafkaTemplate.send("books", message);
+    this.kafkaTemplate.send("books", UUID.randomUUID().toString(), message);
   }
 
 }
