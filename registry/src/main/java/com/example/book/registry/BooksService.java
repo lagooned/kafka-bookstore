@@ -39,12 +39,12 @@ public class BooksService {
 
   public List<Book> getAllBooks() {
     KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
-    ReadOnlyKeyValueStore<String, String> books
+    ReadOnlyKeyValueStore<String, Book> books
       = kafkaStreams.store(
         StoreQueryParameters.fromNameAndType(
           "booksKeyValueStore", QueryableStoreTypes.keyValueStore()));
     return stream(spliteratorUnknownSize(books.all(), 0), false)
-      .map(kv -> new Book().setId(kv.key).setTitle(kv.value))
+      .map(kv -> kv.value)
       .collect(Collectors.toList());
   }
 

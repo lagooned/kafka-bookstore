@@ -2,12 +2,7 @@
 spring:
   kafka:
     bootstrap-servers: kafka:9092
-    consumer:
-      group-id: ed40a8b55a5ba7df9476fb07ad813528
-      auto-offset-rest: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.example.book.registry.BookSerdes.BookJsonSerializer
 ...

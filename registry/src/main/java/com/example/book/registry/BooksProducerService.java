@@ -13,18 +13,19 @@ public class BooksProducerService {
 
   public static final Logger logger = LoggerFactory.getLogger(BooksProducerService.class);
 
-  private KafkaTemplate<String, String> kafkaTemplate;
+  private KafkaTemplate<String, Book> kafkaTemplate;
 
   @Autowired
-  public BooksProducerService(KafkaTemplate<String, String> kafkaTemplate) {
+  public BooksProducerService(KafkaTemplate<String, Book> kafkaTemplate) {
     this.kafkaTemplate = kafkaTemplate;
   }
 
   public Book send(Book book) {
     String uuid = UUID.randomUUID().toString();
-    logger.info("sending message -> {}:{}", uuid, book.getTitle());
-    this.kafkaTemplate.send("books", uuid, book.getTitle());
-    return book.setId(uuid);
+    book.setId(uuid);
+    logger.info("sending message -> {}:{}", uuid, book);
+    this.kafkaTemplate.send("books", uuid, book);
+    return book;
   }
 
 }
