@@ -3,9 +3,7 @@ package com.example.book.registry;
 import static java.util.Spliterators.spliteratorUnknownSize;
 import static java.util.stream.StreamSupport.stream;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Spliterator;
 import java.util.stream.Collectors;
 
 import org.apache.kafka.streams.KafkaStreams;
