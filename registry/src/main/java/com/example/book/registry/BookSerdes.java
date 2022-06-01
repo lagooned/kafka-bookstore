@@ -9,7 +9,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 public class BookSerdes {
 
   public static Map<String, String> CONFIG_MAP = Map.of(
-    JsonDeserializer.TRUSTED_PACKAGES, "*",
+    JsonDeserializer.TRUSTED_PACKAGES, "com.example.book.registry",
     JsonDeserializer.VALUE_DEFAULT_TYPE, new Book().getClass().getName());
 
   public static BookJsonDeserializer BOOK_JSON_DESERIALIZER = new BookJsonDeserializer();
