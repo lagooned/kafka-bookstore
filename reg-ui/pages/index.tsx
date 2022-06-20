@@ -17,13 +17,22 @@ const MainFooter = styled.footer`
   align-items: center;
 `;
 
+type HeaderTextProps = {children: string};
+const HeaderText = ({ children }: HeaderTextProps) => (
+  <Typography
+    variant="h4"
+    component="h1"
+    gutterBottom
+  >
+    {children}
+  </Typography>
+);
+
 const Home: NextPage = () => (
   <Container maxWidth="lg">
     <Meta title="books" />
     <MainBox>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Books
-      </Typography>
+      <HeaderText>Books</HeaderText>
     </MainBox>
     <MainFooter>
       jared engler &copy; 2022
