@@ -21,11 +21,25 @@ module.exports = {
   ],
   rules: {
     'react/jsx-filename-extension': [2, {
-      'extensions': ['.jsx', '.tsx']
+      extensions: ['.jsx', '.tsx'],
     }],
-    "react/function-component-definition": [2, {
-      "namedComponents": "arrow-function",
-      "unnamedComponents": "arrow-function",
-    }]
+    'react/function-component-definition': [2, {
+      namedComponents: 'arrow-function',
+      unnamedComponents: 'arrow-function',
+    }],
+    'import/extensions': [2, {
+      '.js': 'always',
+      '.jsx': 'always',
+      '.ts': 'always',
+      '.tsx': 'always',
+    }],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
   },
 };

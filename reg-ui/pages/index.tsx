@@ -1,22 +1,21 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import Head from 'next/head';
+import { Box, Container, Typography } from '@mui/material';
+import Meta from '../src/components/meta';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => (
-  <div className={styles.container}>
-    <Head>
-      <title>books</title>
-      <meta name="description" content="books" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <main className={styles.main} />
-
+  <Container maxWidth="lg">
+    <Meta title="books" />
+    <Box sx={{ padding: '5vmin' }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Books
+      </Typography>
+    </Box>
     <footer className={styles.footer}>
       jared engler &copy; 2022
     </footer>
-  </div>
+  </Container>
 );
 
 export default Home;
