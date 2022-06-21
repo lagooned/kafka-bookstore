@@ -1,12 +1,10 @@
-import React, { memo } from 'react';
+import React from 'react';
 import type { NextPage } from 'next';
-import {
-  Box, Button, Card,
-  Container, FormControl, Input,
-  InputLabel, List, ListItem,
-  ListItemText, styled, Typography,
-} from '@mui/material';
+import { Box, Container, styled } from '@mui/material';
 import Meta from '../src/components/meta';
+import BookList from '../src/components/booklist';
+import AddBook from '../src/components/addbook';
+import HeaderText from '../src/components/headertext';
 
 const MainBox = styled(Box)`
   padding: 5vmin
@@ -21,50 +19,6 @@ const MainFooter = styled('footer')`
   align-items: center;
 `;
 
-type HeaderTextProps = {children: string};
-const HeaderText = memo(({ children }: HeaderTextProps) => (
-  <Typography variant="h1" gutterBottom>
-    {children}
-  </Typography>
-));
-
-const AddBook = () => {
-  const AddBookCard = styled(Card)`padding: 5vmin`;
-  const AddBookButton = styled(Button)`margin-top: 2vmin`;
-
-  return (
-    <AddBookCard>
-      <FormControl fullWidth>
-        <InputLabel htmlFor="book-name">name</InputLabel>
-        <Input id="book-name" fullWidth />
-        <AddBookButton variant="contained">Add Book</AddBookButton>
-      </FormControl>
-    </AddBookCard>
-  );
-};
-
-type BookListProps = {
-  data: { id: string, title: string }[]
-}
-const BookList = ({ data }: BookListProps) => {
-  const BookListCard = styled(Card)`
-    margin-top: 3vmin;
-  `;
-  return (
-    <BookListCard>
-      <List>
-        {data.map(({ id, title }) => (
-          <ListItem key={id}>
-            <ListItemText>
-              {title}
-            </ListItemText>
-          </ListItem>
-        ))}
-      </List>
-    </BookListCard>
-  );
-};
-
 const title = 'kafka-books';
 const data = [
   { id: 'd0fbb33a-305e-43b1-b66c-a9abb0968e78', title: 'test1' },
@@ -72,20 +26,18 @@ const data = [
   { id: '199a90c5-a882-402d-af2e-aa3745638f15', title: 'test3' },
 ];
 
-const Home: NextPage = () => {
-  return (
-    <Container maxWidth="md">
-      <Meta title={title} />
-      <MainBox>
-        <HeaderText>{title}</HeaderText>
-        <AddBook />
-        <BookList data={data} />
-      </MainBox>
-      <MainFooter>
-        jared engler &copy; 2022
-      </MainFooter>
-    </Container>
-  );
-};
+const Home: NextPage = () => (
+  <Container maxWidth="md">
+    <Meta title={title} />
+    <MainBox>
+      <HeaderText>{title}</HeaderText>
+      <AddBook />
+      <BookList data={data} />
+    </MainBox>
+    <MainFooter>
+      jared engler &copy; 2022
+    </MainFooter>
+  </Container>
+);
 
 export default Home;
