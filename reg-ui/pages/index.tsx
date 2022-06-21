@@ -1,7 +1,10 @@
 import React, { memo } from 'react';
 import type { NextPage } from 'next';
 import {
-  Box, Button, Card, Container, FormControl, Input, InputLabel, List, ListItem, ListItemText, styled, Typography,
+  Box, Button, Card,
+  Container, FormControl, Input,
+  InputLabel, List, ListItem,
+  ListItemText, styled, Typography,
 } from '@mui/material';
 import Meta from '../src/components/meta';
 
@@ -55,7 +58,11 @@ const BookList = () => {
     <BookListCard>
       <List>
         {data.map(({ id, title }) => (
-          <ListItem key={id}><ListItemText>{title}</ListItemText></ListItem>
+          <ListItem key={id}>
+            <ListItemText>
+              {title}
+            </ListItemText>
+          </ListItem>
         ))}
       </List>
     </BookListCard>
