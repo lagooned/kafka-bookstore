@@ -30,7 +30,10 @@ const AddBook = () => {
   );
 };
 
-const BookList = () => {
+type BookListProps = {
+  data: { id: string, title: string }[]
+}
+const BookList = ({ data }: BookListProps) => {
   const BookListCard = styled(Card)`
     margin-top: 3vmin;
   `;
@@ -73,7 +76,7 @@ const Home: NextPage = () => {
       <MainBox>
         <HeaderText>{title}</HeaderText>
         <AddBook />
-        <BookList />
+        <BookList data={data} />
       </MainBox>
       <MainFooter>
         jared engler &copy; 2022
