@@ -34,7 +34,6 @@ const AddBook = () => {
 
   return (
     <AddBookCard>
-      <Typography variant="h5" paddingBottom="5vmin">add book</Typography>
       <FormControl fullWidth>
         <InputLabel htmlFor="book-name">name</InputLabel>
         <Input id="book-name" fullWidth />
