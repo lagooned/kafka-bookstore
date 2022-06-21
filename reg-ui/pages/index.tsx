@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import type { NextPage } from 'next';
 import { Box, Container, styled } from '@mui/material';
 import Meta from '../src/components/meta';
@@ -24,16 +24,20 @@ const title = 'kafka-books';
 const Home: NextPage = () => {
   const [data, setData] = useState([] as BookData[]);
 
-  const populateBooks = () => {
-    fetch('http://localhost:8080/books')
-      .then((r) => r.json())
-      .then((j) => setData(j))
-      .catch((e) => { console.log(e); setData([]) });
-  };
+  const fetchBooksHandler = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8080/books/');
+      if (!response.ok) { throw new Error(''); }
+      const d = await response.json();
+      setData(d);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    populateBooks();
-  }, [])
+    fetchBooksHandler();
+  }, [fetchBooksHandler]);
 
   return (
     <Container maxWidth="md" >
