@@ -31,6 +31,7 @@ const Home: NextPage = () => {
       const d = await response.json();
       setData(d);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }, []);
@@ -40,7 +41,7 @@ const Home: NextPage = () => {
   }, [fetchBooksHandler]);
 
   return (
-    <Container maxWidth="md" >
+    <Container maxWidth="md">
       <Meta title={title} />
       <MainBox>
         <HeaderText>{title}</HeaderText>
@@ -50,7 +51,7 @@ const Home: NextPage = () => {
       <MainFooter>
         jared engler &copy; 2022
       </MainFooter>
-    </Container >
+    </Container>
   );
 };
 
