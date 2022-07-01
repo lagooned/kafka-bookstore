@@ -6,6 +6,8 @@ import BookList, { BookData } from '../src/components/booklist';
 import AddBook from '../src/components/addbook';
 import HeaderText from '../src/components/headertext';
 
+const RegistryBaseUrl = process.env.NEXT_PUBLIC_REGISTRY_HOST ?? 'http://localhost:8080';
+
 const MainBox = styled(Box)`
   padding: 5vmin
 `;
@@ -20,15 +22,13 @@ const MainFooter = styled('footer')`
 `;
 
 const title = 'kafka-books';
-const registryHost = process.env.NEXT_PUBLIC_REGISTRY_HOST ?? '';
-const registryPort = process.env.NEXT_PUBLIC_REGISTRY_PORT ?? '';
 
 const Home: NextPage = () => {
   const [data, setData] = useState([] as BookData[]);
 
   const fetchBooksHandler = useCallback(async () => {
     try {
-      const response = await fetch(`http://${registryHost}:${registryPort}/books/`);
+      const response = await fetch(`${RegistryBaseUrl}/books/`);
       if (!response.ok) { throw new Error(''); }
       const d = await response.json();
       setData(d);
