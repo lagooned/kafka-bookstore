@@ -32,7 +32,7 @@ services:
       - kafka
     command: >-
       /wait-for-it.sh kafka:9092 -- /create-topics-and-listen.sh
-  book_registry:
+  book-registry:
     container_name: br_350066aa7594c13f6a13c7fa2f0bd0fa_1
     build: ./registry
     image: book/registry
@@ -41,6 +41,17 @@ services:
     ports:
       - 8080:8080
     command: >-
-      /app/wait-for-it.sh topics:9999 -- bash -c "java -jar /app/target/registry-*.jar"
+      /app/wait-for-it.sh topics:9999 -- bash -c "java -jar /app/registry.jar"
+  book-ui:
+    container_name: ui_0460750bb2a12e6bfa300730a01fc1be_1
+    build: ./reg-ui
+    image: book/reg-ui
+    depends_on:
+      - book-registry
+    ports:
+      - 3000:3000
+    environment:
+      - REGISTRY_HOST=localhost
+      - REGISTRY_PORT=8080
 ...
 # 73f1cba407ecf2feadd9f992ef63e8ca ends here

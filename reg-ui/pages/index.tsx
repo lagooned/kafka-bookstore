@@ -20,13 +20,15 @@ const MainFooter = styled('footer')`
 `;
 
 const title = 'kafka-books';
+const registryHost = process.env.NEXT_PUBLIC_REGISTRY_HOST ?? '';
+const registryPort = process.env.NEXT_PUBLIC_REGISTRY_PORT ?? '';
 
 const Home: NextPage = () => {
   const [data, setData] = useState([] as BookData[]);
 
   const fetchBooksHandler = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8080/books/');
+      const response = await fetch(`http://${registryHost}:${registryPort}/books/`);
       if (!response.ok) { throw new Error(''); }
       const d = await response.json();
       setData(d);
