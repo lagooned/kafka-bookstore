@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {
+  useEffect, useState, useCallback, MouseEvent,
+} from 'react';
 import type { NextPage } from 'next';
 import { Box, Container, styled } from '@mui/material';
 import Meta from '../src/components/meta';
@@ -38,6 +40,11 @@ const Home: NextPage = () => {
     }
   }, []);
 
+  const addBookHandler = (event: MouseEvent) => {
+    // eslint-disable-next-line no-console
+    console.log(event);
+  };
+
   useEffect(() => {
     fetchBooksHandler();
   }, [fetchBooksHandler]);
@@ -47,7 +54,7 @@ const Home: NextPage = () => {
       <Meta title={title} />
       <MainBox>
         <HeaderText>{title}</HeaderText>
-        <AddBook />
+        <AddBook onAddBook={addBookHandler} />
         <BookList data={data} />
       </MainBox>
       <MainFooter>
