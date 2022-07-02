@@ -9,5 +9,5 @@ from openjdk:11
 workdir /app
 copy --from=builder /registry.jar .
 add wait-for-it.sh .
-cmd ["bash", "-c", "java -jar registry.jar"]
+cmd ["bash", "-c", "java -jar /app/registry.jar"]
 # 462c7c8922ceda87d25e9257031ef10f ends here
