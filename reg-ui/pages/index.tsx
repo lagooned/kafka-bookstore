@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, useCallback, MouseEvent,
+  useEffect, useState, useCallback, ChangeEvent,
 } from 'react';
 import type { NextPage } from 'next';
 import { Box, Container, styled } from '@mui/material';
@@ -27,6 +27,7 @@ const title = 'kafka-books';
 
 const Home: NextPage = () => {
   const [data, setData] = useState([] as BookData[]);
+  const [bookName, setBookName] = useState('');
 
   const fetchBooksHandler = useCallback(async () => {
     try {
@@ -40,9 +41,27 @@ const Home: NextPage = () => {
     }
   }, []);
 
-  const addBookHandler = (event: MouseEvent) => {
-    // eslint-disable-next-line no-console
-    console.log(event);
+  const addBookHandler = async () => {
+    try {
+      await fetch(`${RegistryBaseUrl}/book/new`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: bookName,
+        }),
+      });
+      fetchBooksHandler();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+
+  const addBookTextHandler = ({ target }: ChangeEvent) => {
+    const t = target as HTMLInputElement;
+    setBookName(t.value);
   };
 
   useEffect(() => {
@@ -54,7 +73,11 @@ const Home: NextPage = () => {
       <Meta title={title} />
       <MainBox>
         <HeaderText>{title}</HeaderText>
-        <AddBook onAddBook={addBookHandler} />
+        <AddBook
+          onAddBook={addBookHandler}
+          bookName={bookName}
+          onChange={addBookTextHandler}
+        />
         <BookList data={data} />
       </MainBox>
       <MainFooter>

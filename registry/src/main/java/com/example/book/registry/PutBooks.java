@@ -3,6 +3,7 @@ package com.example.book.registry;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class PutBooks {
     this.booksService = booksService;
   }
 
+  @CrossOrigin
   @PostMapping(value = "/book/new", consumes = APPLICATION_JSON_VALUE)
   public Book addBook(@RequestBody AddBookRequest request) {
     return booksService.createBook(request.toBook());

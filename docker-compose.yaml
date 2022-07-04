@@ -38,6 +38,7 @@ services:
     image: book/registry
     depends_on:
       - kafka
+      - topics
     ports:
       - 8080:8080
     command: >-

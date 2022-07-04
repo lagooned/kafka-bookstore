@@ -1,4 +1,5 @@
-import React, { MouseEvent } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { ChangeEvent, MouseEvent } from 'react';
 import {
   Button, Card, FormControl, Input, InputLabel, styled,
 } from '@mui/material';
@@ -7,15 +8,16 @@ const AddBookCard = styled(Card)`padding: 5vmin`;
 const AddBookButton = styled(Button)`margin-top: 2vmin`;
 
 type AddBookProps = {
-  // eslint-disable-next-line no-unused-vars
   onAddBook: (e: MouseEvent) => void;
+  onChange: (e: ChangeEvent) => void;
+  bookName: string;
 };
 
-const AddBook = ({ onAddBook }: AddBookProps) => (
+const AddBook = ({ onAddBook, bookName, onChange }: AddBookProps) => (
   <AddBookCard>
     <FormControl fullWidth>
       <InputLabel htmlFor="book-name">name</InputLabel>
-      <Input id="book-name" fullWidth />
+      <Input id="book-name" value={bookName} onChange={onChange} fullWidth />
       <AddBookButton onClick={onAddBook} variant="contained">Add Book</AddBookButton>
     </FormControl>
   </AddBookCard>
