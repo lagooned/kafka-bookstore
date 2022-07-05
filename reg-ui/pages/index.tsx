@@ -39,7 +39,7 @@ const Home: NextPage = () => {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  }, []);
+  }, [data]);
 
   const addBookHandler = async () => {
     try {
@@ -57,6 +57,7 @@ const Home: NextPage = () => {
       // eslint-disable-next-line no-console
       console.log(error);
     }
+    setBookName('');
   };
 
   const addBookTextHandler = ({ target }: ChangeEvent) => {
